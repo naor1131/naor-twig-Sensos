@@ -13,10 +13,6 @@ const ListGroups = () => {
   const { groups, setGroups } = useContext(GlobalContext);
   const navigate = useNavigate();
 
-  const handleAddGroupButton: React.MouseEventHandler<HTMLAnchorElement> = (event) => {
-    console.log(event);
-  };
-
   function handleTableReorder(oldIndex: number, newIndex: number): void {
     const newGroups = [...groups];
     if (newIndex === oldIndex) return;
@@ -48,7 +44,7 @@ const ListGroups = () => {
     <WithTitle title="Groups">
       <Card>
         <div className="buttons flex flex-row mb-5">
-          <Button variant="contained" onClick={handleAddGroupButton} startIcon={<AddIcon />} href="/add-group">
+          <Button variant="contained" startIcon={<AddIcon />} href="/add-group">
             Add Group
           </Button>
         </div>

@@ -53,14 +53,16 @@ const Table = <T extends {}>({ data, options, getRowKey, onRowReorder, actionBut
       </div>
       <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
         <SortableContext items={data.map((row) => getRowKey(row))} strategy={verticalListSortingStrategy}>
-          {data.map((row, rowIndex) => {
+          {data.map((row) => {
             const rowKey = getRowKey(row);
             return (
-              <SortableItem key={rowKey} id={rowKey} classname="table-row">
+              <div key={rowKey} id={rowKey} className="table-row">
                 {options?.enableReorder && (
-                  <div className="table-cell">
-                    <ReorderIcon />
-                  </div>
+                  <SortableItem key={rowKey} id={rowKey}>
+                    <div className="table-cell">
+                      <ReorderIcon />
+                    </div>
+                  </SortableItem>
                 )}
                 {Object.entries(row)
                   .filter((entry) => headers.includes(entry[0]))
@@ -77,7 +79,7 @@ const Table = <T extends {}>({ data, options, getRowKey, onRowReorder, actionBut
                     <div className="flex flex-row">
                       {actionButtons?.map((actionButton) => {
                         return (
-                          <div key={actionButton.id} className="icon" onClick={() => actionButton.action(rowKey)}>
+                          <div key={actionButton.id} className="icon cursor-pointer" onClick={() => actionButton.action(rowKey)}>
                             {actionButton.icon}
                           </div>
                         );
@@ -85,7 +87,7 @@ const Table = <T extends {}>({ data, options, getRowKey, onRowReorder, actionBut
                     </div>
                   </div>
                 }
-              </SortableItem>
+              </div>
             );
           })}
         </SortableContext>
